@@ -1,13 +1,21 @@
 <template>
   <v-app>
     <!-- Header Area -->
-    <v-navigation-drawer id="main-nav" v-model="mainNav" :mini-variant="miniVariant" fixed left>
+    <v-navigation-drawer
+      id="main-nav"
+      v-model="mainNav"
+      :mini-variant="miniVariant"
+      dark
+      fixed
+      left
+      :width="navWidth"
+    >
       <v-toolbar-title>{{ formattedAppTitle }}</v-toolbar-title>
       <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="drawer = !drawer" />
       <MenuLinks :general-links="generalLinks" list-class="hidden-sm-and-down" />
     </v-navigation-drawer>
     <!-- side/mobile navigation -->
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" fixed right>
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" dark fixed right>
       <MenuLinks :general-links="generalLinks" list-class="mobile" />
     </v-navigation-drawer>
     <!-- Nuxt content -->
@@ -15,7 +23,7 @@
       <nuxt />
     </v-content>
     <!-- Footer Area -->
-    <v-footer class="py-6">
+    <v-footer dark class="py-6">
       <h2>{{ formattedAppTitle }}</h2>
       <p>{{ appDescription }}</p>
       <ul>
@@ -83,12 +91,35 @@ export default {
       } else {
         return this.appTitle
       }
+    },
+    navWidth() {
+      let width = '40vw'
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          width = '40vw'
+          break
+        case 'sm':
+          width = '35vw'
+          break
+        case 'md':
+          width = '25vw'
+          break
+        case 'lg':
+          width = '20vw'
+          break
+        case 'xl':
+          width = '20vw'
+          break
+      }
+      return width
     }
   }
 }
 </script>
 
 <style lang="scss">
+// global styles shared among pages can go here
+
 // global
 
 *,
@@ -121,37 +152,53 @@ body {
 }
 
 // main nav
-
-#main-nav .v-navigation-drawer__content {
-  .v-toolbar__title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    margin: 1rem 0;
-    text-align: center;
-  }
-
-  .v-list {
-    background: none;
+#main-nav {
+  background-color: rgba(0, 0, 0, 0.5);
+  .v-navigation-drawer__content {
     display: flex;
     flex-direction: column;
-    margin: 0 2rem;
+    justify-content: center;
+    position: relative;
+    .v-toolbar__title {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      position: relative;
+      text-align: center;
+      top: -15vh;
+    }
 
-    .v-list-item {
-      flex: 0;
-      margin: 0 0.5rem;
-      padding: 0 1.5rem;
+    .v-app-bar__nav-icon {
+      align-self: center;
+      position: relative;
+      top: -10vh;
+      .v-btn__content i {
+        font-size: 4rem;
+      }
+    }
 
-      .v-list-item__title {
-        font-size: 1.33rem;
-        font-weight: 400;
+    .v-list {
+      background: none;
+      display: flex;
+      flex-direction: column;
+      margin: 0 2rem;
+
+      .v-list-item {
+        flex: 0;
+        margin: 0 0.5rem;
+        padding: 0 1.5rem;
+
+        .v-list-item__title {
+          font-size: 1.33rem;
+          font-weight: 400;
+        }
       }
     }
   }
 }
 
 // footer
-
 .v-footer {
   display: flex;
   flex-direction: column;
@@ -171,5 +218,15 @@ body {
   }
 }
 
-// global styles shared among pages can go here
+@media screen and (min-width: 768px) {
+  // main nav
+  #main-nav {
+    .v-navigation-drawer__content {
+      .v-toolbar__title {
+        font-size: 2rem;
+        top: -15vh;
+      }
+    }
+  }
+}
 </style>
