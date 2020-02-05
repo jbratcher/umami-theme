@@ -1,33 +1,35 @@
 <template>
   <v-layout>
-    <v-flex>
-      <main>
-        <v-sheet class="ma-0" color="primary" dark tile>
-          <h1 class="headline pa-2" display="headline">Blog ></h1>
-        </v-sheet>
-        <v-list class="py-12">
-          <v-list-item three-line v-for="(blogPost, index) in blogPosts" :key="index">
-            <v-card class="d-flex flex-column">
-              <v-img
-                src="https://picsum.photos/300/240"
-                lazy-src="https://picsum.photos/300/240"
-                max-height="200px"
-              />
-              <v-card-title class="display-1">{{blogPost.title.substring(0, 70)}}</v-card-title>
-              <v-card-subtitle class="subtitle-1">{{blogPost.description.substring(0, 80)}}</v-card-subtitle>
-              <v-card-text>{{blogPost.body.substring(0, 144) + '...'}}</v-card-text>
-              <v-btn
-                class="ml-3 mb-12"
-                max-width="120px"
-                color="primary"
-                nuxt
-                :to="`blog/${blogPost.slug}`"
-              >Read more...</v-btn>
-            </v-card>
-          </v-list-item>
-        </v-list>
-      </main>
-    </v-flex>
+    <v-row>
+      <v-col>
+        <main>
+          <v-sheet class="ma-0" color="primary" dark tile>
+            <h1 class="headline pa-2" display="headline">Blog ></h1>
+          </v-sheet>
+          <v-list class="py-12">
+            <v-list-item three-line v-for="(blogPost, index) in blogPosts" :key="index">
+              <v-card class="d-flex flex-column">
+                <v-img
+                  src="https://picsum.photos/300/240"
+                  lazy-src="https://picsum.photos/300/240"
+                  max-height="200px"
+                />
+                <v-card-title class="display-1">{{blogPost.title.substring(0, 70)}}</v-card-title>
+                <v-card-subtitle class="subtitle-1">{{blogPost.description.substring(0, 80)}}</v-card-subtitle>
+                <v-card-text>{{blogPost.body.substring(0, 144) + '...'}}</v-card-text>
+                <v-btn
+                  class="ml-3 mb-12"
+                  max-width="120px"
+                  color="primary"
+                  nuxt
+                  :to="`blog/${blogPost.slug}`"
+                >Read more...</v-btn>
+              </v-card>
+            </v-list-item>
+          </v-list>
+        </main>
+      </v-col>
+    </v-row>
   </v-layout>
 </template>
 <script>

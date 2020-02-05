@@ -1,15 +1,18 @@
 <template>
   <v-layout>
-    <v-flex>
-      <main>
-        <!-- Hero Section -->
-        <section id="hero">
-          <video autoplay muted loop id="hero-video">
-            <source src="/videos/hero.mp4" type="video/mp4" />
-          </video>
-        </section>
-      </main>
-    </v-flex>
+    <v-row>
+      <v-col>
+        <main>
+          <!-- Hero Section -->
+          <section id="hero">
+            <video autoplay muted loop id="hero-video">
+              <source src="/videos/hero.webm" type="video/webm" />
+              <source src="/videos/hero.mp4" type="video/mp4" />
+            </video>
+          </section>
+        </main>
+      </v-col>
+    </v-row>
   </v-layout>
 </template>
 

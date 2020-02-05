@@ -1,13 +1,15 @@
 <template>
   <v-layout>
-    <v-flex>
-      <main>
-        <!-- Hero Section -->
-        <section id="menu-page">
-          <h1>Menu Page</h1>
-        </section>
-      </main>
-    </v-flex>
+    <v-row>
+      <v-col>
+        <main>
+          <!-- Hero Section -->
+          <section id="menu-page">
+            <h1>Menu Page</h1>
+          </section>
+        </main>
+      </v-col>
+    </v-row>
   </v-layout>
 </template>
 

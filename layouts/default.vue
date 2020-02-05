@@ -1,21 +1,13 @@
 <template>
   <v-app>
     <!-- Header Area -->
-    <v-navigation-drawer
-      id="main-nav"
-      v-model="mainNav"
-      :mini-variant="miniVariant"
-      dark
-      fixed
-      left
-      :width="navWidth"
-    >
+    <v-navigation-drawer id="main-nav" v-model="mainNav" :mini-variant="miniVariant" left fixed>
       <v-toolbar-title>{{ formattedAppTitle }}</v-toolbar-title>
       <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="drawer = !drawer" />
       <MenuLinks :general-links="generalLinks" list-class="hidden-sm-and-down" />
     </v-navigation-drawer>
     <!-- side/mobile navigation -->
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" dark fixed right>
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" fixed right>
       <MenuLinks :general-links="generalLinks" list-class="mobile" />
     </v-navigation-drawer>
     <!-- Nuxt content -->
@@ -23,12 +15,14 @@
       <nuxt />
     </v-content>
     <!-- Footer Area -->
-    <v-footer dark class="py-6">
-      <h2>{{ formattedAppTitle }}</h2>
-      <p>{{ appDescription }}</p>
+    <v-footer tile>
+      <section class="content-container py-6" color="#272727">
+        <h2>{{ formattedAppTitle }}</h2>
+        <p>{{ appDescription }}</p>
+      </section>
       <ul>
         <li v-for="(link, i) in generalLinks" :key="i + link.title + 'footer'">
-          <v-btn text rounded>{{ link.title }}</v-btn>
+          <v-btn :href="link.to" text rounded>{{ link.title }}</v-btn>
         </li>
       </ul>
       <v-container>
@@ -112,6 +106,27 @@ export default {
           break
       }
       return width
+    },
+    contentWidth() {
+      let width = '60vw'
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          width = '60vw'
+          break
+        case 'sm':
+          width = '65vw'
+          break
+        case 'md':
+          width = '75vw'
+          break
+        case 'lg':
+          width = '80vw'
+          break
+        case 'xl':
+          width = '80vw'
+          break
+      }
+      return width
     }
   }
 }
@@ -147,12 +162,30 @@ body {
   overflow-x: hidden;
 }
 
+.v-application--wrap {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas:
+    'main-nav main-content'
+    'main-nav footer';
+  gap: 0;
+}
+
+.v-content {
+  grid-area: main-content;
+}
+
+.theme--dark.v-sheet {
+  background-color: #121212;
+}
+
 .v-card__title {
   word-break: break-word;
 }
 
 // main nav
 #main-nav {
+  grid-area: main-nav;
   background-color: rgba(0, 0, 0, 0.5);
   .v-navigation-drawer__content {
     display: flex;
@@ -200,9 +233,12 @@ body {
 
 // footer
 .v-footer {
+  border-top: 1px solid #aaa;
   display: flex;
   flex-direction: column;
   align-items: center;
+  grid-area: footer;
+  text-align: center;
 
   ul {
     display: flex;
@@ -215,6 +251,14 @@ body {
     display: flex;
     justify-content: center;
     padding: 1rem 0;
+  }
+}
+
+// pages
+
+.content-container {
+  h2 {
+    font-family: 'Playfair Display', serif;
   }
 }
 

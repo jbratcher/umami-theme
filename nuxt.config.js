@@ -106,9 +106,9 @@ export default {
    */
   vuetify: {
     theme: {
-      light: true,
+      dark: true,
       themes: {
-        light: {
+        dark: {
           primary: colors.blueGrey.darken2,
           accent: colors.blue.lighten1,
           secondary: colors.lightBlue.darken3,
