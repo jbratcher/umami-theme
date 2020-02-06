@@ -53,7 +53,7 @@ main {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 960px) {
   main {
     .v-list {
       align-items: flex-start;

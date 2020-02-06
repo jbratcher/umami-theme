@@ -119,7 +119,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 960px) {
   #contact-page {
     & > section {
       margin-bottom: 4rem;

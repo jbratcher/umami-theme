@@ -1,13 +1,18 @@
 <template>
   <v-app>
     <!-- Header Area -->
-    <v-navigation-drawer id="main-nav" v-model="mainNav" :mini-variant="miniVariant" left fixed>
+    <!-- Large Screen Main Nav -->
+    <v-navigation-drawer class="hidden-sm-and-down" id="main-nav" :width="navWidth" left fixed>
       <v-toolbar-title>{{ formattedAppTitle }}</v-toolbar-title>
-      <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="drawer = !drawer" />
-      <MenuLinks :general-links="generalLinks" list-class="hidden-sm-and-down" />
+      <MenuLinks :general-links="generalLinks" />
     </v-navigation-drawer>
+    <!-- Small Screen Main Nav -->
+    <v-app-bar class="hidden-md-and-up" id="mobile-nav" width="100%">
+      <v-toolbar-title>{{ formattedAppTitle }}</v-toolbar-title>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+    </v-app-bar>
     <!-- side/mobile navigation -->
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" fixed right>
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" color="#121212" fixed right>
       <MenuLinks :general-links="generalLinks" list-class="mobile" />
     </v-navigation-drawer>
     <!-- Nuxt content -->
@@ -15,7 +20,7 @@
       <nuxt />
     </v-content>
     <!-- Footer Area -->
-    <v-footer tile>
+    <v-footer padless tile>
       <section class="content-container py-6" color="#272727">
         <h2>{{ formattedAppTitle }}</h2>
         <p>{{ appDescription }}</p>
@@ -87,43 +92,22 @@ export default {
       }
     },
     navWidth() {
-      let width = '40vw'
+      let width = '25vw'
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
-          width = '40vw'
+          width = '25vw'
           break
         case 'sm':
-          width = '35vw'
+          width = '25vw'
           break
         case 'md':
           width = '25vw'
           break
         case 'lg':
-          width = '20vw'
+          width = '25vw'
           break
         case 'xl':
-          width = '20vw'
-          break
-      }
-      return width
-    },
-    contentWidth() {
-      let width = '60vw'
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          width = '60vw'
-          break
-        case 'sm':
-          width = '65vw'
-          break
-        case 'md':
-          width = '75vw'
-          break
-        case 'lg':
-          width = '80vw'
-          break
-        case 'xl':
-          width = '80vw'
+          width = '25vw'
           break
       }
       return width
@@ -158,17 +142,14 @@ html {
 
 html,
 body {
-  min-height: 100vh;
   overflow-x: hidden;
 }
 
 .v-application--wrap {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-areas:
-    'main-nav main-content'
-    'main-nav footer';
-  gap: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
 }
 
 .v-content {
@@ -185,8 +166,9 @@ body {
 
 // main nav
 #main-nav {
-  grid-area: main-nav;
   background-color: rgba(0, 0, 0, 0.5);
+  grid-area: main-nav;
+  padding: 0 1rem;
   .v-navigation-drawer__content {
     display: flex;
     flex-direction: column;
@@ -199,7 +181,7 @@ body {
       font-weight: 900;
       position: relative;
       text-align: center;
-      top: -15vh;
+      top: -10vh;
     }
 
     .v-app-bar__nav-icon {
@@ -215,18 +197,32 @@ body {
       background: none;
       display: flex;
       flex-direction: column;
-      margin: 0 2rem;
+      align-items: center;
 
       .v-list-item {
         flex: 0;
-        margin: 0 0.5rem;
+        margin: 0.5rem 0;
         padding: 0 1.5rem;
+        min-width: 150px;
 
         .v-list-item__title {
           font-size: 1.33rem;
           font-weight: 400;
         }
       }
+    }
+  }
+}
+
+// mobile nav
+
+#mobile-nav {
+  z-index: 1;
+  .v-toolbar__content {
+    display: flex;
+    justify-content: space-between;
+    .v-toolbar__title {
+      font-family: 'Playfair Display', serif;
     }
   }
 }
@@ -239,10 +235,12 @@ body {
   align-items: center;
   grid-area: footer;
   text-align: center;
+  width: 100%;
 
   ul {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     list-style-type: none;
     padding: 1rem 0;
   }
@@ -262,7 +260,15 @@ body {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 960px) {
+  .v-application--wrap {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      'main-nav main-content'
+      'main-nav footer';
+    gap: 0;
+  }
   // main nav
   #main-nav {
     .v-navigation-drawer__content {
@@ -270,6 +276,13 @@ body {
         font-size: 2rem;
         top: -15vh;
       }
+    }
+  }
+
+  .v-footer {
+    ul {
+      flex-direction: row;
+      justify-content: center;
     }
   }
 }
