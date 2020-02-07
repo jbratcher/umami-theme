@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 import * as strUtil from './utils/str-utils.js'
 
-// format package name for title display
+// uppercase first letter of each word and replace hyphens with spaces
 const title = strUtil.titleCase(process.env.npm_package_name.replace(/-/g, " "));
 
 export default {
@@ -109,14 +109,14 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blueGrey.darken2,
-          accent: colors.blue.lighten1,
-          secondary: colors.lightBlue.darken3,
+          primary: colors.red.darken2,
+          accent: colors.red.lighten1,
+          secondary: colors.red.darken4,
           info: colors.blueGrey.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
-          background: colors.blue.base,
+          background: colors.grey.base,
         }
       }
     }

@@ -6,7 +6,7 @@
           <v-sheet>
             <!-- Content Section -->
             <section hidden>
-              <h1>Contact</h1>
+              <h1 class="heading">Contact</h1>
             </section>
 
             <section class="content-container">
@@ -46,7 +46,7 @@
                 type="submit"
                 name="submit"
                 :disabled="!valid"
-                color="secondary"
+                color="primary"
                 class="mr-4"
               >Submit</v-btn>
             </v-form>

@@ -164,6 +164,10 @@ body {
   word-break: break-word;
 }
 
+.heading {
+  margin-left: 1rem;
+}
+
 // main nav
 #main-nav {
   background-color: rgba(0, 0, 0, 0.5);
@@ -208,6 +212,15 @@ body {
         .v-list-item__title {
           font-size: 1.33rem;
           font-weight: 400;
+        }
+      }
+
+      .v-list-item--active {
+        background: #d32f2f; // red darken-2;
+        color: #d32f2f; // red darken-2;
+        & > * {
+          background: none;
+          color: #fff;
         }
       }
     }
