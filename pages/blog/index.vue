@@ -1,14 +1,14 @@
 <template>
   <v-layout>
     <v-row>
-      <v-col>
+      <v-col class="py-0">
         <main>
           <v-sheet class="ma-0" color="primary" dark tile>
             <h1 class="headline pa-2">Blog ></h1>
           </v-sheet>
           <v-list class="py-12">
             <v-list-item three-line v-for="(blogPost, index) in blogPosts" :key="index">
-              <v-card class="d-flex flex-column">
+              <v-card class="d-flex flex-column align-self-stretch">
                 <v-img
                   src="https://picsum.photos/300/240"
                   lazy-src="https://picsum.photos/300/240"
@@ -18,7 +18,7 @@
                 <v-card-subtitle class="subtitle-1">{{blogPost.description.substring(0, 80)}}</v-card-subtitle>
                 <v-card-text>{{blogPost.body.substring(0, 144) + '...'}}</v-card-text>
                 <v-btn
-                  class="ml-3 mb-12"
+                  class="mt-auto ml-3 mb-3"
                   max-width="120px"
                   color="primary"
                   nuxt
@@ -56,7 +56,7 @@ main {
 @media screen and (min-width: 960px) {
   main {
     .v-list {
-      align-items: flex-start;
+      align-items: stretch;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
