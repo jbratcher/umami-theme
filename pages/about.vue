@@ -5,7 +5,7 @@
         <main>
           <!-- Hero Section -->
           <section id="about-page">
-            <h1>About Us</h1>
+            <h1 class="heading ml-0">About Us</h1>
             <h2>We're steeped in tradition but embrace modern, delicious twists</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales augue massa, vel sagittis sem dictum nec. Donec in tortor vitae velit ultrices venenatis. Maecenas in accumsan lectus. Vestibulum nec mi sagittis, hendrerit felis nec, sollicitudin libero. Praesent tempus urna libero, eget facilisis purus posuere sed. Quisque malesuada tincidunt arcu, et pharetra felis semper malesuada. Maecenas semper lobortis mi, vitae venenatis arcu semper tempor. Etiam imperdiet ut ligula a varius. Quisque tristique varius justo, ac iaculis lorem rutrum non. Nullam non facilisis elit. Phasellus eget mollis nisl. In suscipit quam enim, sit amet finibus sem hendrerit at. Morbi eros leo, dapibus in felis in, bibendum accumsan urna.</p>
             <p>Suspendisse porta, tortor at semper hendrerit, sapien quam condimentum nulla, eu tempor justo dui vel enim. Fusce id gravida erat. Ut volutpat leo eu pretium condimentum. Maecenas convallis ut magna eu posuere. Nulla volutpat molestie nisi, eu ullamcorper lorem placerat nec. Integer egestas tristique felis id tincidunt. Nunc ac accumsan nulla. Pellentesque nunc nisi, ornare in nibh sed, condimentum bibendum ex. Donec pretium augue sit amet scelerisque pretium. Phasellus et elit velit. Aliquam eu interdum nulla. Mauris accumsan rutrum tincidunt. Ut quis odio venenatis, mollis risus sit amet, congue risus. Aliquam odio ligula, pharetra ut iaculis vel, feugiat vel quam. Morbi interdum posuere molestie.</p>
@@ -35,22 +35,27 @@ export default {
 #about-page {
   text-align: center;
   padding: 0 2rem;
-  h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    padding: 2rem 0;
-  }
 
   h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.33rem;
+    font-size: 1.67rem;
     padding-bottom: 1.5rem;
   }
 
   p {
-    font-size: 1.5rem;
+    font-size: 1.33rem;
     padding-bottom: 2rem;
     text-align: left;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  #about-page {
+    text-align: center;
+    padding: 0 6rem;
+
+    p {
+      font-size: 1.33rem;
+    }
   }
 }
 </style>

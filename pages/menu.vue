@@ -1,14 +1,20 @@
 <template>
   <v-layout>
     <v-row>
-      <v-col>
+      <v-col class="pb-0 pt-3">
         <main>
           <!-- Hero Section -->
           <section id="menu-page">
             <h1 class="heading">Menu</h1>
             <v-card>
-              <v-tabs v-model="tab" color="primary" fixed-tabs hide-slider>
-                <v-tab v-for="item in items" :key="item.tab">{{ item.tab }}</v-tab>
+              <v-tabs
+                v-model="tab"
+                color="primary"
+                fixed-tabs
+                hide-slider
+                :vertical="menuDirection"
+              >
+                <v-tab v-for="item in items" :key="item.tab" class="mx-0">{{ item.tab }}</v-tab>
               </v-tabs>
 
               <v-tabs-items v-model="tab">
@@ -20,7 +26,7 @@
                       class="menu-item"
                     >
                       <span class="menu-item-title">{{ entry.name }}</span>
-                      <span class="menu-item-subtitle">{{ entry.price }}</span>
+                      <span class="menu-item-price">{{ entry.price }}</span>
                       <span class="menu-item-description">{{ entry.description }}</span>
                     </v-container>
                   </v-card>
@@ -125,6 +131,21 @@ export default {
         { tab: 'Entrees', content: this.entrees },
         { tab: 'Ala-carte', content: this.alacarte }
       ]
+    },
+    menuDirection() {
+      let vertical = true
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          vertical = true
+          break
+        case 'sm':
+        case 'md':
+        case 'lg':
+        case 'xl':
+          vertical = false
+          break
+      }
+      return vertical
     }
   }
 }
@@ -132,7 +153,11 @@ export default {
 
 <style lang="scss">
 .v-slide-group__content {
+  align-items: center;
   max-width: 100vw;
+  .v-tab {
+    font-size: 1.5rem;
+  }
 }
 .v-card.menu-items {
   display: flex;
@@ -143,6 +168,7 @@ export default {
 .menu-item {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
   grid-template-areas:
     'title price'
     'description description';
@@ -153,15 +179,19 @@ export default {
     grid-area: title;
   }
 
-  .menu-item-subtitle {
-    font-size: 1.5rem;
+  .menu-item-price {
+    font-size: 1.33rem;
     font-weight: 200;
     grid-area: price;
+    justify-self: end;
+    margin-right: 4rem;
   }
 
   .menu-item-description {
-    font-size: 1.25rem;
+    align-self: start;
+    font-size: 1.125rem;
     grid-area: description;
+    margin-right: 1rem;
   }
 }
 
@@ -170,6 +200,25 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 1fr;
+  }
+
+  .menu-item {
+    margin: 1rem 0;
+    .menu-item-title {
+      font-size: 1.5rem;
+    }
+
+    .menu-item-price {
+      font-size: 1.33rem;
+      justify-self: end;
+      margin-right: 4rem;
+    }
+
+    .menu-item-description {
+      align-self: start;
+      font-size: 1.125rem;
+      margin-right: 1rem;
+    }
   }
 }
 </style>

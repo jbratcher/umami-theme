@@ -44,7 +44,7 @@ export default {
 
 <style lang="scss">
 #hero {
-  min-height: 100vh;
+  height: 400px;
   .cta-links {
     display: flex;
     align-items: center;
@@ -90,6 +90,7 @@ export default {
 
 @media screen and (min-width: 960px) {
   #hero {
+    height: 100vh;
     .content-container {
       top: 10vh;
 

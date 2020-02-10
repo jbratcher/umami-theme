@@ -142,6 +142,7 @@ html {
 
 html,
 body {
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -165,7 +166,15 @@ body {
 }
 
 .heading {
-  margin-left: 1rem;
+  color: #d32f2f;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 2rem;
+}
+
+.text-grey {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 // main nav
