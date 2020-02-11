@@ -36,9 +36,14 @@ export default {
   text-align: center;
   padding: 0 2rem;
 
+  h1 {
+    padding-bottom: 2rem;
+  }
+
   h2 {
+    color: rgba(255, 255, 255, 0.6);
     font-size: 1.67rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 5rem;
   }
 
   p {

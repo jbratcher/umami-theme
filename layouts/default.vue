@@ -197,15 +197,6 @@ body {
       top: -10vh;
     }
 
-    .v-app-bar__nav-icon {
-      align-self: center;
-      position: relative;
-      top: -10vh;
-      .v-btn__content i {
-        font-size: 4rem;
-      }
-    }
-
     .v-list {
       background: none;
       display: flex;
@@ -245,6 +236,13 @@ body {
     justify-content: space-between;
     .v-toolbar__title {
       font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+    }
+  }
+  .v-app-bar__nav-icon .v-btn__content {
+    align-self: center;
+    i {
+      font-size: 2.5rem;
     }
   }
 }

@@ -49,8 +49,8 @@ export default {
 .mobile {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-right: 0;
+  margin: 0 2rem;
   padding-top: 2rem;
 
   .v-list-item {
