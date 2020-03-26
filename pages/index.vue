@@ -1,33 +1,32 @@
 <template>
-  <v-layout>
+  <v-container>
     <v-row>
-      <v-col>
-        <v-container fluid id="hero">
-          <!-- Hero Section -->
-          <ul class="cta-links">
-            <li>
+      <v-col class="d-flex flex-column align-center justify-center">
+        <!-- Hero Section -->
+        <v-container class="mb-12" fluid>
+          <ul class="d-flex align-center justify-end">
+            <li class="mx-3">
               <a href="tel:123-456-7890">(123)&nbsp;456-7890</a>
             </li>
-            <li>
+            <li class="mx-3">
               <v-btn color="primary" rounded>
-                <a href="/contact">Reservations</a>
+                <a href="/contact" class="white--text">Reservations</a>
               </v-btn>
             </li>
           </ul>
+        </v-container>
 
-          <section class="content-container">
-            <h1>Umami</h1>
-            <h2>We deliver deliciousness</h2>
-          </section>
-
-          <video autoplay muted loop id="hero-video">
-            <source src="/videos/hero.mp4" type="video/mp4" />
-            <source src="/videos/hero.webm" type="video/webm" />
-          </video>
+        <v-container class="my-12 py-12 text-center" fluid>
+          <h1
+            :class="{'display-4 font-weight-bold red--text': $breakpoint.mdAndUp, 'display-2 font-weight-bold red--text': $breakpoint.smAndDown}"
+          >Umami</h1>
+          <h2
+            :class="{'display-1 font-weight-bold': $breakpoint.mdAndUp, 'headline font-weight-bold': $breakpoint.smAndDown}"
+          >We deliver deliciousness</h2>
         </v-container>
       </v-col>
     </v-row>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -43,66 +42,4 @@ export default {
 </script>
 
 <style lang="scss">
-#hero {
-  height: 400px;
-  .cta-links {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    justify-content: flex-end;
-    position: relative;
-    z-index: 1;
-    li {
-      margin: 0 1rem;
-      a {
-        color: #fff;
-        text-decoration: none;
-      }
-    }
-  }
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    top: 10vh;
-    text-align: center;
-
-    h1 {
-      color: #d32f2f;
-      font-size: 5rem;
-      text-shadow: 0.25rem 0.25rem 0.5rem #111;
-    }
-
-    h2 {
-      font-size: 2rem;
-    }
-  }
-  #hero-video {
-    position: fixed;
-    right: 0;
-    top: 0;
-    min-width: 100%;
-    min-height: 100%;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  #hero {
-    height: 100vh;
-    .content-container {
-      top: 10vh;
-
-      h1 {
-        font-size: 8rem;
-        text-shadow: 0.25rem 0.25rem 0.5rem #111;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-    }
-  }
-}
 </style>

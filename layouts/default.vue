@@ -2,39 +2,75 @@
   <v-app>
     <!-- Header Area -->
     <!-- Large Screen Main Nav -->
-    <v-navigation-drawer class="hidden-sm-and-down" id="main-nav" :width="navWidth" left fixed>
-      <v-toolbar-title>{{ formattedAppTitle }}</v-toolbar-title>
-      <MenuLinks :general-links="generalLinks" />
-    </v-navigation-drawer>
-    <!-- Small Screen Main Nav -->
-    <v-app-bar class="hidden-md-and-up" id="mobile-nav" width="100%">
-      <v-toolbar-title>{{ formattedAppTitle }}</v-toolbar-title>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-    </v-app-bar>
-    <!-- side/mobile navigation -->
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" color="#121212" fixed right>
-      <MenuLinks :general-links="generalLinks" list-class="mobile" />
-    </v-navigation-drawer>
-    <!-- Nuxt content -->
-    <v-content>
-      <nuxt />
-    </v-content>
-    <!-- Footer Area -->
-    <v-footer padless tile>
-      <section class="content-container py-6" color="#272727">
-        <h2>{{ formattedAppTitle }}</h2>
-        <p>{{ appDescription }}</p>
-      </section>
-      <ul>
-        <li v-for="(link, i) in generalLinks" :key="i + link.title + 'footer'">
-          <v-btn :href="link.to" text rounded>{{ link.title }}</v-btn>
-        </li>
-      </ul>
-      <v-container>
-        {{ new Date().getFullYear() }}&nbsp;-&nbsp;
-        <strong>{{ appTitle }}</strong>
-      </v-container>
-    </v-footer>
+    <v-container class="py-0" fluid>
+      <v-row>
+        <v-col class="pa-0">
+          <video autoplay muted loop id="hero-video">
+            <source src="/videos/hero.mp4" type="video/mp4" />
+            <source src="/videos/hero.webm" type="video/webm" />
+          </video>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col col="4" sm="12">
+          <v-navigation-drawer
+            class="hidden-sm-and-down align-center"
+            color="rgba(0, 0, 0, 0.5)"
+            :width="navWidth"
+            left
+            app
+          >
+            <v-toolbar-title class="display-2 my-12 pb-12 text-center">{{ formattedAppTitle }}</v-toolbar-title>
+            <MenuLinks :general-links="generalLinks" />
+          </v-navigation-drawer>
+          <!-- Small Screen Main Nav -->
+          <v-app-bar class="hidden-md-and-up justify-space-around" width="100%">
+            <v-toolbar-title class="display-1">{{ formattedAppTitle }}</v-toolbar-title>
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+          </v-app-bar>
+          <!-- side/mobile navigation -->
+          <v-navigation-drawer
+            v-model="drawer"
+            :mini-variant="miniVariant"
+            color="grey darken-4"
+            fixed
+            right
+          >
+            <MenuLinks :general-links="generalLinks" />
+          </v-navigation-drawer>
+        </v-col>
+      </v-row>
+      <!-- Nuxt content -->
+      <v-row>
+        <v-col cols="9" class="pa-0 ml-auto">
+          <v-content class="pa-0">
+            <nuxt />
+          </v-content>
+        </v-col>
+      </v-row>
+      <!-- Footer Area -->
+      <v-row>
+        <v-col cols="9" class="pa-0 mt-12 ml-auto">
+          <v-footer class="d-flex flex-column align-center text-center" tile>
+            <v-container class="py-6" color="grey darken-4">
+              <h2>{{ formattedAppTitle }}</h2>
+              <p>{{ appDescription }}</p>
+            </v-container>
+            <nav>
+              <ul>
+                <li v-for="(link, i) in generalLinks" :key="i + link.title + 'footer'">
+                  <v-btn :href="link.to" text rounded>{{ link.title }}</v-btn>
+                </li>
+              </ul>
+            </nav>
+            <v-container>
+              {{ new Date().getFullYear() }}&nbsp;-&nbsp;
+              <strong>{{ appTitle }}</strong>
+            </v-container>
+          </v-footer>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
@@ -117,8 +153,6 @@ export default {
 </script>
 
 <style lang="scss">
-// global styles shared among pages can go here
-
 // global
 
 *,
@@ -129,181 +163,79 @@ export default {
   padding: 0;
 }
 
-html {
+html,
+body,
+.v-application {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
   box-sizing: border-box;
-}
-
-html,
-body {
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-.v-application--wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 0;
-}
-
-.v-content {
-  grid-area: main-content;
-}
-
-.theme--dark.v-sheet {
-  background-color: #121212;
-}
-
-.v-card__title {
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
   word-break: break-word;
-}
-
-.heading {
-  color: #d32f2f;
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0 0 1rem 2rem;
-}
-
-.text-grey {
-  color: rgba(255, 255, 255, 0.6);
+  word-spacing: 1px;
 }
 
 // main nav
-#main-nav {
-  background-color: rgba(0, 0, 0, 0.5);
-  grid-area: main-nav;
-  padding: 0 1rem;
-  .v-navigation-drawer__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    .v-toolbar__title {
-      color: #fff;
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      position: relative;
-      text-align: center;
-      top: -10vh;
-    }
 
-    .v-list {
-      background: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .v-list-item {
-        flex: 0;
-        margin: 0.5rem 0;
-        padding: 0 1.5rem;
-        min-width: 150px;
-
-        .v-list-item__title {
-          font-size: 1.33rem;
-          font-weight: 400;
-        }
-      }
-
-      .v-list-item--active {
-        background: #d32f2f; // red darken-2;
-        color: #d32f2f; // red darken-2;
-        & > * {
-          background: none;
-          color: #fff;
-        }
-      }
-    }
-  }
-}
-
-// mobile nav
-
-#mobile-nav {
-  z-index: 1;
+.v-toolbar,
+.v-toolbar--prominent {
   .v-toolbar__content {
-    display: flex;
-    justify-content: space-between;
-    .v-toolbar__title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-    }
-  }
-  .v-app-bar__nav-icon .v-btn__content {
-    align-self: center;
-    i {
-      font-size: 2.5rem;
-    }
-  }
-}
-
-// footer
-.v-footer {
-  border-top: 1px solid #aaa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  grid-area: footer;
-  text-align: center;
-  width: 100%;
-
-  ul {
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+// global styles shared among pages can go here
+
+.v-application {
+  .v-card__title,
+  .v-card__subtitle,
+  .v-card__text {
+    word-break: keep-all;
+  }
+
+  article > * + * {
+    margin-top: 1em;
+  }
+
+  nav > ul {
+    padding-left: 0;
+  }
+
+  ul,
+  ol {
     list-style-type: none;
-    padding: 1rem 0;
   }
 
-  .container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem 0;
+  a {
+    text-decoration: none;
   }
 }
 
-// pages
-
-.content-container {
-  h2 {
-    font-family: 'Playfair Display', serif;
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-@media screen and (min-width: 960px) {
-  .v-application--wrap {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-areas:
-      'main-nav main-content'
-      'main-nav footer';
-    gap: 0;
-  }
-  // main nav
-  #main-nav {
-    .v-navigation-drawer__content {
-      .v-toolbar__title {
-        font-size: 2rem;
-        top: -15vh;
-      }
-    }
-  }
+// full screen video
 
-  .v-footer {
-    ul {
-      flex-direction: row;
-      justify-content: center;
-    }
-  }
+#hero-video {
+  position: fixed;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 </style>

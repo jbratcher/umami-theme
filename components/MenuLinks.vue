@@ -7,7 +7,8 @@
       v-for="(item, i) in generalLinks"
       :key="i + `-${item.title}`"
       :to="item.to"
-      :class="`${listItemClass} mb-0`"
+      :class="`${listItemClass} mb-3`"
+      active-class="red--text"
       router
       exact
     >
@@ -46,19 +47,4 @@ export default {
 </script>
 
 <style lang="scss">
-.mobile {
-  display: flex;
-  flex-direction: column;
-  margin-right: 0;
-  margin: 0 2rem;
-  padding-top: 2rem;
-
-  .v-list-item {
-    margin: 1rem 0;
-
-    .v-list-item__title {
-      font-size: 1.67rem;
-    }
-  }
-}
 </style>

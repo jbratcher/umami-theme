@@ -1,8 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
-import * as strUtil from './utils/str-utils.js'
+import {
+  titleCase,
+  unhyphenate
+} from './utils/str-utils.js'
 
 // uppercase first letter of each word and replace hyphens with spaces
-const title = strUtil.titleCase(process.env.npm_package_name.replace(/-/g, " "));
+const title = titleCase(unhyphenate(process.env.npm_package_name));
 
 export default {
   mode: 'universal',
@@ -73,7 +76,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/breakpoint.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -105,6 +110,8 @@ export default {
    ** colors object https://vuetifyjs.com/en/styles/colors
    */
   vuetify: {
+    treeShake: true,
+    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {
