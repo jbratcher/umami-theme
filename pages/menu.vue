@@ -1,43 +1,51 @@
 <template>
-  <v-layout>
+  <v-container class="py-0" fluid>
     <v-row>
-      <v-col class="pb-0 pt-3">
-        <main>
-          <!-- Hero Section -->
-          <section id="menu-page">
-            <h1 class="heading">Menu</h1>
-            <v-card>
-              <v-tabs
-                v-model="tab"
-                color="primary"
-                fixed-tabs
-                hide-slider
-                :vertical="menuDirection"
-              >
-                <v-tab v-for="item in items" :key="item.tab" class="mx-0">{{ item.tab }}</v-tab>
-              </v-tabs>
+      <v-col class="px-0">
+        <!-- Main Section -->
+        <v-container class="px-0">
+          <h1
+            :class="{'display-2 font-weight-bold mb-12 mt-6 pl-6': $breakpoint.mdAndUp, 'display-1 font-weight-bold mb-6 mt-0 pl-6': $breakpoint.smAndDown}"
+          >Menu</h1>
+          <v-card>
+            <v-tabs
+              v-model="tab"
+              color="primary"
+              fixed-tabs
+              :grow="!$breakpoint.mdAndUp"
+              :vertical="!$breakpoint.mdAndUp"
+              background-color="primary"
+            >
+              <v-tab v-for="item in items" :key="item.tab" class="mx-0">{{ item.tab }}</v-tab>
+            </v-tabs>
 
-              <v-tabs-items v-model="tab">
-                <v-tab-item v-for="item in items" :key="item.tab">
-                  <v-card class="menu-items" flat>
-                    <v-container
+            <v-tabs-items v-model="tab">
+              <v-tab-item v-for="item in items" :key="item.tab">
+                <v-container>
+                  <v-row>
+                    <v-col
                       v-for="(entry, i) in item.content"
                       :key="entry.name + i"
-                      class="menu-item"
+                      sm="6"
+                      class="py-6"
                     >
-                      <span class="menu-item-title">{{ entry.name }}</span>
-                      <span class="menu-item-price">{{ entry.price }}</span>
-                      <span class="menu-item-description">{{ entry.description }}</span>
-                    </v-container>
-                  </v-card>
-                </v-tab-item>
-              </v-tabs-items>
-            </v-card>
-          </section>
-        </main>
+                      <v-card class="d-flex" flat>
+                        <v-card-title class="pt-0">{{ entry.name }}</v-card-title>
+                        <v-card-subtitle class="align-self-center pt-3 title">{{ entry.price }}</v-card-subtitle>
+                      </v-card>
+                      <v-card flat>
+                        <v-card-text class="menu-item-description">{{ entry.description }}</v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-tab-item>
+            </v-tabs-items>
+          </v-card>
+        </v-container>
       </v-col>
     </v-row>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -152,73 +160,4 @@ export default {
 </script>
 
 <style lang="scss">
-.v-slide-group__content {
-  align-items: center;
-  max-width: 100vw;
-  .v-tab {
-    font-size: 1.5rem;
-  }
-}
-.v-card.menu-items {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-
-.menu-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 1fr;
-  grid-template-areas:
-    'title price'
-    'description description';
-  margin: 1rem 0;
-  .menu-item-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    grid-area: title;
-  }
-
-  .menu-item-price {
-    font-size: 1.33rem;
-    font-weight: 200;
-    grid-area: price;
-    justify-self: end;
-    margin-right: 4rem;
-  }
-
-  .menu-item-description {
-    align-self: start;
-    font-size: 1.125rem;
-    grid-area: description;
-    margin-right: 1rem;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  .v-card.menu-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 1fr;
-  }
-
-  .menu-item {
-    margin: 1rem 0;
-    .menu-item-title {
-      font-size: 1.5rem;
-    }
-
-    .menu-item-price {
-      font-size: 1.33rem;
-      justify-self: end;
-      margin-right: 4rem;
-    }
-
-    .menu-item-description {
-      align-self: start;
-      font-size: 1.125rem;
-      margin-right: 1rem;
-    }
-  }
-}
 </style>

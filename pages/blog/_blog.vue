@@ -1,23 +1,32 @@
 <template>
-  <v-layout>
+  <v-container class="pa-0" fluid>
     <v-row>
-      <v-col :class="columnPadding">
-        <main>
-          <v-sheet class="ma-0" color="#1E1E1E" dark tile>
-            <h1 class="headline px-2 py-4 text-grey">{{ blogPost.title }}</h1>
-          </v-sheet>
+      <v-col class="py-0">
+        <v-container class="pa-0" fluid>
           <article>
-            <v-card class="d-flex flex-column align-center mx-auto" tile>
-              <v-img src="https://picsum.photos/800/300" lazy-src="https://picsum.photos/10/6" />
-              <v-card-title class="display-1">{{blogPost.title}}</v-card-title>
-              <v-card-subtitle class="subtitle-1">{{blogPost.description}}</v-card-subtitle>
-              <v-card-text v-html="$md.render(blogPost.body)"></v-card-text>
+            <v-card class="d-flex flex-column mx-auto text-center" tile>
+              <v-img
+                :alt="blogPost.title"
+                :aspect-ratio="16/9"
+                src="https://picsum.photos/800/300"
+                lazy-src="https://picsum.photos/10/6"
+                :height="$breakpoint.mdAndUp ? '18.75rem' : '12.5rem'"
+              />
+              <v-card-title
+                :class="{'display-2 mx-auto pt-6 pb-9': $breakpoint.mdAndUp, 'display-1  mx-auto pt-6  pb-9': $breakpoint.smAndDown}"
+              >{{blogPost.title}}</v-card-title>
+              <v-card-subtitle
+                :class="{'headline font-weight-regular pb-9': $breakpoint.mdAndUp, 'title font-weight-regular pb-9': $breakpoint.smAndDown}"
+              >{{blogPost.description}}</v-card-subtitle>
+              <v-card class="mx-auto text-left" flat :width="$breakpoint.mdAndUp ? '80%' : '90vw'">
+                <v-card-text class="body-1" v-html="$md.render(blogPost.body)"></v-card-text>
+              </v-card>
             </v-card>
           </article>
-        </main>
+        </v-container>
       </v-col>
     </v-row>
-  </v-layout>
+  </v-container>
 </template>
 <script>
 export default {
@@ -27,61 +36,8 @@ export default {
       return {
         blogPost: await require(`~/assets/content/blog/${params.blog}.json`)
       }
-  },
-  computed: {
-    columnPadding() {
-      let classes = 'py-0 pl-4'
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          classes = 'py-0'
-          break
-        case 'sm':
-        case 'md':
-        case 'lg':
-        case 'xl':
-          classes = 'py-0 pl-4'
-          break
-      }
-      return classes
-    }
   }
 }
 </script>
 <style lang="scss" scoped>
-.v-card__subtitle + .v-card__text {
-  padding-top: 1rem;
-}
-
-article {
-  .v-image {
-    max-width: 100vw;
-    max-height: 300px;
-  }
-
-  .post-content {
-    padding: 1rem 1.5rem;
-    width: 95vw;
-  }
-
-  .v-card__text {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  article {
-    .v-image {
-      width: 100%;
-    }
-    .post-content {
-      padding: 1rem 1.5rem;
-      width: 70vw;
-    }
-    .v-card__text {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-  }
-}
 </style>

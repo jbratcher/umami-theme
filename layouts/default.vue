@@ -12,21 +12,21 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col col="4" sm="12">
+        <v-col class="pa-0">
           <v-navigation-drawer
+            app
             class="hidden-sm-and-down align-center"
             color="rgba(0, 0, 0, 0.5)"
-            :width="navWidth"
-            left
-            app
+            fixed
+            width="25vw"
           >
             <v-toolbar-title class="display-2 my-12 pb-12 text-center">{{ formattedAppTitle }}</v-toolbar-title>
             <MenuLinks :general-links="generalLinks" />
           </v-navigation-drawer>
           <!-- Small Screen Main Nav -->
-          <v-app-bar class="hidden-md-and-up justify-space-around" width="100%">
+          <v-app-bar class="hidden-md-and-up" width="100%">
             <v-toolbar-title class="display-1">{{ formattedAppTitle }}</v-toolbar-title>
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+            <v-app-bar-nav-icon class="ml-auto" @click.stop="drawer = !drawer" />
           </v-app-bar>
           <!-- side/mobile navigation -->
           <v-navigation-drawer
@@ -42,7 +42,7 @@
       </v-row>
       <!-- Nuxt content -->
       <v-row>
-        <v-col cols="9" class="pa-0 ml-auto">
+        <v-col xs="12" sm="9" class="pa-0 ml-auto">
           <v-content class="pa-0">
             <nuxt />
           </v-content>
@@ -50,14 +50,14 @@
       </v-row>
       <!-- Footer Area -->
       <v-row>
-        <v-col cols="9" class="pa-0 mt-12 ml-auto">
+        <v-col xs="12" sm="9" class="mt-12 ml-auto pa-0">
           <v-footer class="d-flex flex-column align-center text-center" tile>
             <v-container class="py-6" color="grey darken-4">
               <h2>{{ formattedAppTitle }}</h2>
               <p>{{ appDescription }}</p>
             </v-container>
             <nav>
-              <ul>
+              <ul class="d-flex flex-wrap">
                 <li v-for="(link, i) in generalLinks" :key="i + link.title + 'footer'">
                   <v-btn :href="link.to" text rounded>{{ link.title }}</v-btn>
                 </li>
@@ -126,27 +126,6 @@ export default {
       } else {
         return this.appTitle
       }
-    },
-    navWidth() {
-      let width = '25vw'
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          width = '25vw'
-          break
-        case 'sm':
-          width = '25vw'
-          break
-        case 'md':
-          width = '25vw'
-          break
-        case 'lg':
-          width = '25vw'
-          break
-        case 'xl':
-          width = '25vw'
-          break
-      }
-      return width
     }
   }
 }
@@ -200,17 +179,13 @@ body,
   .v-card__text {
     word-break: keep-all;
   }
-
-  article > * + * {
-    margin-top: 1em;
-  }
-
-  nav > ul {
-    padding-left: 0;
+  .v-card__text > * + * {
+    margin-top: 1rem;
   }
 
   ul,
   ol {
+    padding-left: 0;
     list-style-type: none;
   }
 

@@ -9,8 +9,8 @@
       :to="item.to"
       :class="`${listItemClass} mb-3`"
       active-class="red--text"
-      router
-      exact
+      rounded
+      nuxt
     >
       <v-list-item-action v-if="item.icon" class="mr-1">
         <v-icon>{{ item.icon }}</v-icon>

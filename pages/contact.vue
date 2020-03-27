@@ -1,60 +1,55 @@
 <template>
-  <v-layout>
+  <v-container class="pa-0" fluid>
     <v-row>
-      <v-col class="py-12">
-        <main id="contact-page">
-          <v-sheet>
-            <!-- Content Section -->
-            <section hidden>
-              <h1 class="heading">Contact</h1>
-            </section>
+      <v-col class="py-0">
+        <v-card class="d-flex flex-column mx-auto text-center pt-9 pb-12">
+          <!-- Content Section -->
+          <v-container class="d-none">
+            <h1>Contact</h1>
+          </v-container>
 
-            <section class="content-container">
-              <h2>Have a question?</h2>
-              <p>Send us a message!</p>
-            </section>
+          <v-container>
+            <h2
+              :class="{'display-2 mb-3': $breakpoint.mdAndUp, 'display-1 mb-3': $breakpoint.smAndDown}"
+            >Have a question?</h2>
+            <p>Send us a message!</p>
+          </v-container>
 
-            <v-form
-              id="contact-form"
-              ref="form"
-              v-model="valid"
-              name="contact"
-              method="post"
-              value="contactform"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              lazy-validation
-            >
-              <input type="hidden" name="form-name" value="contact" />
-              <v-text-field v-model="name" :rules="nameRules" label="Name" name="name" required></v-text-field>
-              <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                label="E-mail"
-                name="email"
-                required
-              ></v-text-field>
-              <v-textarea
-                v-model="message"
-                :rules="messageRules"
-                label="Your Message"
-                name="message"
-                required
-              ></v-textarea>
-              <v-btn class="mr-4" name="reset" color="info" @click="reset">Reset</v-btn>
-              <v-btn
-                type="submit"
-                name="submit"
-                :disabled="!valid"
-                color="primary"
-                class="mr-4"
-              >Submit</v-btn>
-            </v-form>
-          </v-sheet>
-        </main>
+          <v-form
+            class="px-12"
+            id="contact-form"
+            ref="form"
+            v-model="valid"
+            name="contact"
+            method="post"
+            value="contactform"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            lazy-validation
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <v-text-field v-model="name" :rules="nameRules" label="Name" name="name" required></v-text-field>
+            <v-text-field v-model="email" :rules="emailRules" label="E-mail" name="email" required></v-text-field>
+            <v-textarea
+              v-model="message"
+              :rules="messageRules"
+              label="Your Message"
+              name="message"
+              required
+            ></v-textarea>
+            <v-btn class="mr-4" name="reset" color="info" @click="reset">Reset</v-btn>
+            <v-btn
+              type="submit"
+              name="submit"
+              :disabled="!valid"
+              color="primary"
+              class="mr-4"
+            >Submit</v-btn>
+          </v-form>
+        </v-card>
       </v-col>
     </v-row>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -100,33 +95,4 @@ export default {
 </script>
 
 <style lang="scss">
-#contact-page {
-  text-align: center;
-  & > section {
-    margin-bottom: 4rem;
-  }
-  h2 {
-    font-size: 2rem;
-  }
-  p {
-    font-size: 1.5rem;
-  }
-  .v-form {
-    max-width: 75vw;
-    margin: 0 auto;
-    padding: 2rem 0;
-    text-align: right;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  #contact-page {
-    & > section {
-      margin-bottom: 4rem;
-    }
-    .v-form {
-      max-width: 50vw;
-    }
-  }
-}
 </style>
